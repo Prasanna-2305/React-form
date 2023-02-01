@@ -1,31 +1,31 @@
-import React,{useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
 import Validate from './Validate'
-const Form = ({submitForm}) => {
+const Form = ({ submitForm }) => {
     const [values, setValues] = useState({
         fullname: "",
         email: "",
         password: "",
 
     })
-    const [errors, setErrors]= useState({});
-    const [dataIsCorrect, setDataIsCorrect] =useState(false);
-    const handleChange = (e)=>{
+    const [errors, setErrors] = useState({});
+    const [dataIsCorrect, setDataIsCorrect] = useState(false);
+    const handleChange = (e) => {
         setValues({
             ...values,
-            [e.target.name]:e.target.value,
+            [e.target.name]: e.target.value,
         })
     };
-    const handleFormSubmit = (e)=>{
+    const handleFormSubmit = (e) => {
         e.preventDefault();
         setErrors(Validate(values));
         setDataIsCorrect(true);
     };
-    useEffect(()=>{
-        if(Object.keys(errors).length === 0 && dataIsCorrect){
+    useEffect(() => {
+        if (dataIsCorrect) {
             submitForm(true);
         }
-    },[errors]);
+    }, [errors]);
     return (
         <div className='container'>
             <div className='app-wrapper'>
@@ -34,41 +34,44 @@ const Form = ({submitForm}) => {
                 </div>
                 <form className='form-wrapper'>
                     <div className='name'>
-                    <input 
-                    className='input' 
-                    type='text' 
-                    placeholder='Name' 
-                    name='fullname' 
-                    value={values.fullname} 
-                    onChange={handleChange}
-                    />
-                    {errors.fullname && <p className='error'>{errors.fullname}</p>}
+                        <input
+                            data-testid='handleFirst'
+                            className='input'
+                            type='text'
+                            placeholder='Name'
+                            name='fullname'
+                            value={values.fullname}
+                            onChange={handleChange}
+                        />
+                        {errors.fullname && <p className='error'>{errors.fullname}</p>}
                     </div>
 
                     <div className='email'>
-                    <input className='input' 
-                    type='email' 
-                    placeholder='Email'
-                    name='email'
-                    value={values.email}
-                    onChange={handleChange}
-                    />
-                      {errors.email && <p className='error'>{errors.email}</p>}
+                        <input className='input'
+                            data-testid='handleFirst2'
+                            type='email'
+                            placeholder='Email'
+                            name='email'
+                            value={values.email}
+                            onChange={handleChange}
+                        />
+                        {errors.email && <p className='error'>{errors.email}</p>}
                     </div>
 
                     <div className='password'>
-                    <input className='input' 
-                    type='password' 
-                    placeholder='Pasword' 
-                    name='password' 
-                    value={values.password} 
-                    onChange ={handleChange}
-                    />
-                      {errors.password && <p className='error'>{errors.password}</p>}
+                        <input className='input'
+                            data-testid='handleFirst3'
+                            type='password'
+                            placeholder='Pasword'
+                            name='password'
+                            value={values.password}
+                            onChange={handleChange}
+                        />
+                        {errors.password && <p className='error'>{errors.password}</p>}
                     </div>
-                   
+
                     <div>
-                        <button className='submit' onClick={handleFormSubmit}>Register</button>
+                        <button data-testid='handleSubmit' className='submit' onClick={handleFormSubmit}>Register</button>
                     </div>
                 </form>
             </div>
